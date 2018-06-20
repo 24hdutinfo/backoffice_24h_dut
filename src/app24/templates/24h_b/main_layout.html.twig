@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta name="generator" content="Hugo 0.35" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>24h des DUT info 2017-2018</title>
+
+
+    <link href="{{ base_path() }}/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ base_path() }}/components/font-awesome/css/font-awesome.min.css">
+
+
+    <link href="{{ base_path() }}/css/24h_bootstrap.css" rel="stylesheet">
+    <!--
+    <link rel="stylesheet"   href="{{ base_path() }}/css/24h.css">
+    -->
+</head>
+
+
+<body>
+
+
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="{{ base_path() }}/">24h DUT info</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon" starter-template></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+
+            <ul class="navbar-nav mr-auto">
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ base_path() }}/epreuve">Epreuves<span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ base_path() }}/info">Infos Pratiques<span class="sr-only">(current)</span></a>
+                </li>
+
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ base_path() }}/document">Documents<span class="sr-only">(current)</span></a>
+                </li>
+
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ base_path() }}/teams">Participants<span class="sr-only">(current)</span></a>
+                </li>
+
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ base_path() }}/resultats">Résultats<span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item ">
+                    <a class="nav-link" href="{{ base_path() }}/#sponsors_24h">Sponsors<span class="sr-only">(current)</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="https://twitter.com/hashtag/24hiutinfo">#24hiutinfo</a>
+                </li>
+
+
+
+
+            </ul>
+
+
+            <a href="{{ base_path() }}/page_inscription">
+                <button type="button" class="btn btn-warning">Inscription >></button>
+            </a>
+
+
+
+
+        </div>
+
+
+    </div>
+
+</nav>
+
+
+
+
+<div class="jumbotron jumbotron-fluid text-light bg-dark header24h">
+        <div class="container-fluid">
+        <div class="row">
+
+
+
+            <div class="col-sm-2 offset-sm-1">
+                <img src="{{ base_path() }}/img/stopwatch.png" alt="chronometre" width="60%">
+            </div>
+            <div class="col">
+                <h1 class="display-4"><a href="{{ base_path() }}/" class="text-light">24h des DUT Informatique 2018</a></h1>
+                <p class="lead">25-26 mai 2018, IUT Nancy-Charlemagne, Nancy</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<main role="main" class="container-fluid">
+
+
+    {% block main_content %}
+    {% endblock %}
+
+
+
+
+
+
+<div class="footer bg-dark text-light">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-10">
+                <p></p>
+                <p class="text-muted"> Site construit avec <a href="https://gohugo.io/" class="text-white">hugo</a>, <a href="https://getbootstrap.com/" class="text-white">bootstrap</a> et images de <a href="http://game-icons.net/" class="text-white">game-icons</a> </p>
+            </div>
+            <div class="col-sm-2">
+                <p/>
+                <p>
+                    <a href="#" class="text-white">Back to top</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<br>
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="{{ base_path() }}/js\/jquery.js"><\/script>')</script>
+<script src="{{ base_path() }}/js/bootstrap/bootstrap.min.js"></script>
+</body>
+</html>

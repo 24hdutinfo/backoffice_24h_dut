@@ -1,0 +1,11 @@
+
+DirectoryIndex index.html
+
+
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ dispatch.php [QSA,L]
+
+#CGIPassAuth On

@@ -1,0 +1,13 @@
+{% extends "main_layout.html.twig" %}
+
+{% block main_content %}
+  <div class="alert alert-danger">
+
+
+    <h4 class="alert-heading">Erreur !</h4>
+
+    <p>{{ message }}</p>
+
+    <p><a href="{{ base_path() }}">retour à l'accueil</a> </p>
+  </div>
+{% endblock %}

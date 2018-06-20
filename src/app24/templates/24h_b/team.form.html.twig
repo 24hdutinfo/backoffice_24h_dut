@@ -1,0 +1,218 @@
+{%  extends "main_layout.html.twig" %}
+
+  {%  block main_content %}
+
+<h2>Formulaire d'inscription d'une équipe</h2>
+
+      <p>  Remplissez le formulaire suivant. Une confirmation d'inscription vous sera adressée par mail.</p>
+
+  {% if errors %}
+      <div class="alert alert-danger">
+          <h4 class="alert-heading">Erreurs de saisie</h4>
+          <p>Des erreurs dans la saisie des données ont été détectées. Merci de corriger :</p>
+
+      <hr>
+          <ul>
+        {% for  messages in errors %}
+            {% for message in messages %}
+          <li> {{ message }}</li>
+            {% endfor %}
+        {%  endfor %}
+        </ul>
+    </div>
+    {% endif %}
+
+  <form id="team_creation_form" class="form" method="POST" action="{{ base_path() }}{{ path_for('createTeam') }}">
+
+      <input type="hidden" name="{{ csrf.keyname }}" value="{{ csrf.name }}">
+      <input type="hidden" name="{{ csrf.keyval }}" value="{{ csrf.value }}">
+
+
+      <fieldset> <legend>Informations générales sur l'équipe :</legend>
+          <div class="form-row">
+          <div class="form-group col">
+              <label for="ctform_nom_equipe">Nom de l'équipe</label>
+              <input type="text" class="form-control form-control-sm" name="ctform_nom_equipe" id="ctform_nom_equipe" required autofocus placeholder="nom de l'équipe" value="{{ v.ctform_nom_equipe }}">
+          </div>
+
+          <div class="form-group col">
+              <label for="ctform_pass">password équipe</label>
+              <input type="password" class="form-control form-control-sm" name="ctform_pass" id="ctform_pass" required placeholder="password (8 char. min)" minlength="8">
+          </div>
+          </div>
+
+          <div class="form-row">
+          <div class="form-group col-md-8">
+              <label for="ctform_email">email de contact</label>
+              <input type="email" class="form-control form-control-sm" name="ctform_email" id="ctform_email" required placeholder="email de contact" value="{{ v.ctform_email }}">
+
+
+          </div>
+
+          <div class="form-group col-md-4">
+              <label for="ctform_iut">IUT d'origine</label>
+                <select name="ctform_iut" class="form-control form-control-sm" id="ctform_iut">
+                {% for iut in iuts %}
+                    <option value="{{ loop.index }}" {% if loop.index == v.ctform_iut %} SELECTED {% endif %}>
+                        {{ iut }}
+                    </option>
+                {% endfor %}
+                </select>
+          </div>
+          </div>
+      </fieldset>
+
+      <div class="row">
+
+      <fieldset class="col-md-6"><legend>Equipier n° 1</legend>
+
+          <div class="form-row">
+          <div class="form-group col"> <!--<label for="ctform_e1_nom">nom</label> -->
+          <input type="text" class="form-control form-control-sm" name="ctform_e1_nom" id="ctform_e1_nom" required placeholder="nom équipier 1" value="{{ v.ctform_e1_nom }}">
+          </div>
+
+          <div class="form-group col"> <!--<label for="ctform_e1_prenom">prénom</label> -->
+              <input  type="text" class="form-control form-control-sm" name="ctform_e1_prenom" id="ctform_e1_prenom" required placeholder="prénom équipier 1" value="{{ v.ctform_e1_prenom }}">
+          </div>
+          </div>
+
+          <div class="form-row">
+          <div class="form-group col-md-8"> <!--<label for="ctform_e1_mail">mail</label> -->
+          <input type="email" class="form-control form-control-sm" name="ctform_e1_mail" id="ctform_e1_mail" required placeholder="mail équipier 1" value="{{ v.ctform_e1_mail }}">
+          </div>
+
+          <div class="form-group col-md-4"> <!--<label for="ctform_e1_year">année DUT</label> -->
+          <select name="ctform_e1_year" class="form-control form-control-sm" id="ctform_e1_year"><option value="1">DUT 1ère année</option><option value="2" selected>DUT 2ème année</option></select>
+          </div>
+          </div>
+      </fieldset>
+
+      <fieldset class="col-md-6"><legend>Equipier n° 2</legend>
+
+          <div class="form-row">
+          <div class="form-group col"> <!--<label for="ctform_e2_nom">nom</label> -->
+              <input type="text" class="form-control form-control-sm" name="ctform_e2_nom" id="ctform_e2_nom" required placeholder="nom équipier 2" value="{{ v.ctform_e2_nom }}">
+          </div>
+
+          <div class="form-group col"> <!-- <label for="ctform_e2_prenom">prénom</label> -->
+              <input type="text" class="form-control form-control-sm" name="ctform_e2_prenom" id="ctform_e2_prenom" required placeholder="prénom équipier 2" value="{{ v.ctform_e2_prenom }}">
+          </div>
+          </div>
+
+          <div class="form-row">
+          <div class="form-group col-md-8"> <!--<label for="ctform_e2_mail">mail</label>-->
+              <input type="email" class="form-control form-control-sm" name="ctform_e2_mail" id="ctform_e2_mail" required placeholder="mail équipier 2" value="{{ v.ctform_e2_mail }}">
+          </div>
+
+          <div class="form-group col-md-4"> <!--<label for="ctform_e2_year">année DUT</label> -->
+              <select name="ctform_e2_year"  class="form-control form-control-sm" id="ctform_e2_year"><option value="1">DUT 1ère année</option><option value="2" selected>DUT 2ème année</option></select>
+          </div>
+          </div>
+      </fieldset>
+
+      </div>
+
+      <div class="row">
+      <fieldset class="col-md-6"><legend>Equipier n° 3</legend>
+
+          <div class="form-row">
+          <div class="form-group col"> <!--<label for="ctform_e3_nom">nom</label>-->
+              <input type="text" class="form-control form-control-sm" name="ctform_e3_nom" id="ctform_e3_nom" required placeholder="nom équipier 3" value="{{ v.ctform_e3_nom }}">
+          </div>
+
+          <div class="form-group col"> <!--<label for="ctform_e3_prenom">prénom</label>-->
+              <input type="text" class="form-control form-control-sm" name="ctform_e3_prenom" id="ctform_e3_prenom" required placeholder="prénom équipier 3" value="{{ v.ctform_e3_prenom }}">
+          </div>
+          </div>
+          <div class="form-row">
+          <div class="form-group col-md-8"> <!-- <label for="ctform_e3_mail">mail</label>-->
+              <input type="email" class="form-control form-control-sm" name="ctform_e3_mail" id="ctform_e3_mail" required placeholder="mail équipier 3" value="{{ v.ctform_e3_mail }}">
+          </div>
+
+          <div class="form-group col-md-4"> <!--<label for="ctform_e3_year">année DUT</label>-->
+              <select name="ctform_e3_year" class="form-control form-control-sm" id="ctform_e3_year"><option value="1">DUT 1ère année</option><option value="2" selected>DUT 2ème année</option></select>
+          </div>
+      </div>
+
+      </fieldset>
+
+      <fieldset class="col-md-6"><legend>Equipier n° 4</legend>
+        <div class="form-row">
+          <div class="form-group col"> <!--<label for="ctform_e4_nom">nom</label>-->
+              <input type="text" class="form-control form-control-sm" name="ctform_e4_nom" id="ctform_e4_nom" required placeholder="nom équipier 4" value="{{ v.ctform_e4_nom }}">
+          </div>
+
+          <div class="form-group col"> <!--<label for="ctform_e4_prenom">prénom</label>-->
+              <input type="text" class="form-control form-control-sm" name="ctform_e4_prenom" id="ctform_e4_prenom" required placeholder="prénom équipier 4" value="{{ v.ctform_e4_prenom }}">
+          </div>
+        </div>
+
+          <div class="form-row">
+          <div class="form-group col-md-8"> <!--<label for="ctform_e4_mail">mail</label>-->
+              <input type="email" class="form-control form-control-sm" name="ctform_e4_mail" id="ctform_e4_mail" required placeholder="mail équipier 4" value="{{ v.ctform_e4_mail }}">
+          </div>
+
+          <div class="form-group col-md-4"> <!--<label for="ctform_e4_year">année DUT</label>-->
+              <select name="ctform_e4_year" class="form-control form-control-sm" id="ctform_e4_year"><option value="1">DUT 1ère année</option><option value="2" selected>DUT 2ème année</option></select>
+          </div>
+      </div>
+
+      </fieldset>
+
+      </div>
+
+      <div class="row">
+      <fieldset class="col-md-6"><legend>Equipier n° 5</legend>
+        <div class="form-row">
+          <div class="form-group col"> <!--<label for="ctform_e5_nom">nom</label>-->
+              <input type="text" class="form-control form-control-sm" name="ctform_e5_nom" id="ctform_e5_nom" required placeholder="nom équipier 5" value="{{ v.ctform_e5_nom }}">
+          </div>
+
+          <div class="form-group col"> <!--<label for="ctform_e5_prenom">prénom</label>-->
+              <input type="text" class="form-control form-control-sm" name="ctform_e5_prenom" id="ctform_e5_prenom" required placeholder="prénom équipier 5" value="{{ v.ctform_e5_prenom }}">
+          </div>
+        </div>
+
+          <div class="form-row">
+          <div class="form-group col-md-8"> <!--<label for="ctform_e5_mail">mail</label>-->
+              <input type="email" class="form-control form-control-sm" name="ctform_e5_mail" id="ctform_e5_mail" required placeholder="mail équipier 5" value="{{ v.ctform_e5_mail }}">
+          </div>
+
+          <div class="form-group col-md-4"> <!--<label for="ctform_e5_year">année DUT</label>-->
+              <select name="ctform_e5_year" class="form-control form-control-sm" id="ctform_e5_year"><option value="1">DUT 1ère année</option><option value="2" selected>DUT 2ème année</option></select>
+          </div>
+          </div>
+
+      </fieldset>
+
+      <fieldset class="col-md-6"><legend>Equipier n° 6</legend>
+          <div class="form-row">
+          <div class="form-group col"> <!--<label for="ctform_e6_nom">nom</label>-->
+              <input type="text" class="form-control form-control-sm" name="ctform_e6_nom" id="ctform_e6_nom"  placeholder="nom équipier 6" value="{{ v.ctform_e6_nom }}">
+          </div>
+
+          <div class="form-group col"> <!--<label for="ctform_e6_prenom">prénom</label>-->
+              <input type="text" class="form-control form-control-sm" name="ctform_e6_prenom" id="ctform_e6_prenom"  placeholder="prénom équipier 6" value="{{ v.ctform_e6_prenom }}">
+          </div>
+          </div>
+
+          <div class="form-row">
+
+          <div class="form-group col-md-8"> <!--<label for="ctform_e6_mail">mail</label>-->
+              <input type="email" class="form-control form-control-sm" name="ctform_e6_mail" id="ctform_e6_mail"  placeholder="mail équipier 6" value="{{ v.ctform_e6_mail }}">
+          </div>
+
+          <div class="form-group col-md-4"> <!--<label for="ctform_e6_year">année DUT</label>-->
+              <select name="ctform_e6_year" class="form-control form-control-sm" id="ctform_e6_year"><option value="1">DUT 1ère année</option><option value="2" selected>DUT 2ème année</option></select>
+          </div>
+          </div>
+
+      </fieldset>
+      </div>
+
+      <button class="btn btn-warning" type="submit" name="ctform_submit" value="ctform_create_team">valider l'inscription</button>
+  </form>
+<br>
+
+
+    {%  endblock %}

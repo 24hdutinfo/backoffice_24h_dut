@@ -1,0 +1,84 @@
+{% extends "admin_layout.html.twig" %}
+
+{% block main_admin_content %}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Administration de l'application 24h DUT
+            <small>envoi de messages aux équipes inscrites</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i> Level</li>
+            <li class="active">{{ user.user_level == 10 ? 'ADMIN' : 'NINJA' }}</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+
+
+
+        <div class="box">
+            <div class="box-header"><h3 class="box-title">Envoyer un message</h3></div>
+            <div class="box-body">
+        <div class="row">
+
+            <div class="col-xs-12">
+
+            <form role="form" method="post" action="{{ path_for('send_message') }}">
+
+                <input type="hidden" name="{{ csrf.keyname }}" value="{{ csrf.name }}">
+                <input type="hidden" name="{{ csrf.keyval }}" value="{{ csrf.value }}">
+
+                <textarea name="msg_form_text" rows="8" id="msg_editor">
+                    <br>
+                    <p>Saisir ici le message à envoyer</p>
+                    <br>
+                </textarea>
+
+                <br>
+                <button type="submit" class="btn btn-primary">envoyer</button>
+            </form>
+
+
+            </div>
+
+        </div> <!-- row -->
+
+            </div>
+        </div> <!-- box -->
+
+
+        {% for message in messages %}
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="box box-widget">
+                    <div class="box-header with-border">
+                        <span>message : </span>
+                        <span>{{ message.created_at |date("d-m-Y")  }}</span>
+                    </div>
+
+                    <div class="box-body">
+                        {{ message.content | raw  }}
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+
+
+
+
+
+
+    </section>
+
+
+{% endblock %}

@@ -1,0 +1,90 @@
+{% extends "admin_layout.html.twig" %}
+
+{% block main_admin_content %}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Administration de l'application 24h DUT
+            <small>gestion des inscriptions</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i> Level</li>
+            <li class="active">{{ user.user_level == 10 ? 'ADMIN' : 'NINJA' }}</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+
+        <div class="box"> <div class="box-body">
+        <div class="row">
+
+            <div class="col-xs-2">
+                <a class="btn btn-app" href="{{ base_path() }}{{ path_for('teams_download') }}"><i class="fa fa-download"></i>télécharger les équipes</a>
+            </div>
+
+            <div class="col-xs-2">
+                <a class="btn btn-app" href="{{ base_path() }}{{ path_for('participants_download') }}"><i class="fa fa-download"></i>télécharger les participants</a>
+            </div>
+        </div>
+        </div>
+        </div>
+
+        <div class="row"> <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header"><h3 class="box-title">Liste des équipes inscrites :</h3></div>
+        <div class="box-body">
+        <table id="list_teams_table" class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>Equipe</th>
+                <th>IUT</th>
+                <th>date insc.</th>
+                <th>paiement</th>
+                <th>valide</th>
+                <th>ordre</th>
+                <th>action</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {%  for e in equipes %}
+              <tr> <form id="{{ e.id }}"   method="post" action="{{ base_path() }}/admin/teams/{{ e.id }}">
+
+                      <input type="hidden" name="{{ csrf.keyname }}" value="{{ csrf.name }}">
+                      <input type="hidden" name="{{ csrf.keyval }}" value="{{ csrf.value }}">
+
+                <td>{{ e.team_name | raw}}</td>
+                <td>{{ e.team_from | iutname }}</td>
+                <td>{{ e.created_at | date("d-m-Y // H:i") }}</td>
+                <td>
+                    <label>
+                        <input form="{{ e.id }}" type="checkbox" value="1" name="lf_paiement" class="flat-green" {{ e.registration_paid ==1 ? 'checked':''}}>
+                    </label>
+                </td>
+                <td><label>
+                        <input form="{{ e.id }}" type="checkbox" value="1" name="lf_valide" class="flat-green" {{ e.valid_registration ==1 ? 'checked':''}}>
+                    </label>
+                </td>
+                <td>{{ e.team_priority }}</td>
+
+                <td>
+                      <button form="{{ e.id }}" type="submit" class="btn btn-sm danger">modifier</button>
+                </td>
+                  </form>
+              </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+            </div> </div><!-- box -->
+            </div></div> <!-- row -->
+
+
+
+    </section>
+
+
+{% endblock %}

@@ -1,0 +1,73 @@
+
+<html>
+
+<BODY>
+
+<div>
+  Bonjour {{e.team_name | raw}},
+
+  <p>
+  Votre inscription aux 24h des DUT Info est bien prise en compte, avec les informations rappelées dans la suite.
+
+  Cette inscription sera définitive à condition d'être validée (dans le cas où plusieurs équipes d'un même IUT s'inscrivent) et payée.
+
+  La manifestation aura lieu à l'IUT Nancy-Charlemagne les 25 et 26 mai 2018.
+  Vous êtes attendus le vendredi 25 mai à partir de 12h pour l'accueil et l'installation.
+  </p>
+
+  <p>
+  Vous pouvez consulter votre inscription et suivre son état en suivant le lien suivant : <a href="{{ e.team_url }}"> {{ e.team_url }} </a>
+  </p>
+  <strong>paiement de l'inscription: </strong>
+  <ul>
+    <li>vous payez vous-même: envoyez un chèque de 72€ à l'ordre de : ASSIDUT, accompagné du récépissé d'inscription imprimé </li>
+    <li>votre IUT paye: inprimez un récépissé d'inscription et transmettez à l'IUT qui nous fera parvenir un bon de commande.
+      Les documents nécessaires sont disponibles sur notre site, rubrique "documents"
+    </li>
+  </ul>
+
+  <strong>Adresse d'envoi du paiement :  </strong>
+  <ul class="list-unstyled">
+    <li>24h DUT Info - Secrétariat du Département d'Informatique </li>
+    <li>IUT Nancy-Charlemagne</li>
+    <li>2ter Boulevard Charlemagne </li>
+    <li>CS 55227 </li>
+    <li> 54042 Nancy cedex</li>
+  </ul>
+
+  <p>Consultez notre site, rubriques "infos pratiques" et "Documents" pour des précisions sur l'organisation de
+  la manifestation et pour préparer votre participation.</p>
+
+  A bientôt, à Nancy
+
+  Le comité d'organisation 24h des DUT 2018
+
+</div>
+
+<hr>
+
+<h5>Données d'inscription de l'équipe : </h5>
+<table class="table">
+  <tr> <th>IUT d'origine </th> <td>{{e.team_from | iutname}}</td></tr>
+  <tr> <th>Nom de l'équipe </th> <td>{{e.team_name | raw}}</td></tr>
+  <tr> <th>email contact </th> <td>{{e.contact_email}}</td></tr>
+  <tr> <th>date de l'inscription </th> <td>{{ e.created_at| date("d-m-Y // H:i") }}</td></tr>
+  <tr> <th>état de l'inscription </th> <td>{{ e.valid_registration == 1 ? 'validée' : 'en attente'}}</td></tr>
+  <tr> <th>paiement </th> <td>{{e.registration_paid ==1 ? 'reçu': 'en attente'}}</tr>
+
+</table>
+<h5>membres de l'équipe : </h5>
+<table class="table">
+    {% for m in e.membres %}
+      <tr> <td>{{m.firstname | raw}} {{m.lastname |raw}}</td><td>{{ m.email }}</td></tr>
+    {% endfor %}
+
+</table>
+{% if  e.valid_registration != 1 %}
+  <p class="alert alert-warning"><strong>Attention : </strong> Votre inscription est la n° {{e.team_priority}} pour l'iut de {{e.team_from | iutname}}. Elle sera validée
+    si des places sont disponibles après la date limite d'inscription.</p>
+{% endif %}
+
+</BODY>
+
+</html>

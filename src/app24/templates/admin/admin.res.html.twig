@@ -1,0 +1,100 @@
+{% extends "admin_layout.html.twig" %}
+
+{% block main_admin_content %}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Administration de l'application 24h DUT
+            <small>gestion des résultats</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i> Level</li>
+            <li class="active">{{ user.user_level == 10 ? 'ADMIN' : 'NINJA' }}</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Télécharger les fichiers de saisie de résultats</h3>
+            </div>
+
+            <div class="box-body">
+        <div class="row">
+
+            {% for e in epreuves %}
+            <div class="col-xs-2">
+                <a class="btn btn-app" href="{{ base_path() }}{{ e.path }}">
+                    <i class="fa fa-download"></i>épreuve {{ e.id }} ({{ e.libele }})</a>
+            </div>
+            {% endfor %}
+
+        </div>
+        </div>
+        </div>
+
+        <div class="box">
+            <div class="box-header"><h3 class="box-title">transmettre les fichiers résultat</h3></div>
+            <div class="box-body">
+        <div class="row">
+
+            <div class="col-xs-8">
+
+            <form role="form" method="post" enctype="multipart/form-data" action="{{ path_for('upload_file_res') }}">
+
+                <input type="hidden" name="{{ csrf.keyname }}" value="{{ csrf.name }}">
+                <input type="hidden" name="{{ csrf.keyval }}" value="{{ csrf.value }}">
+
+                    <div class="form-group">
+                        <label for="resInputFile">Choisir le fichier à uploader</label>
+                        <input type="file" id="resInputFile" name="upload_file_res">
+
+                        <p class="help-block">attention : le fichier doit conserver la structure téléchargée</p>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">envoyer</button>
+            </form>
+
+            <p> {{ msg }}</p>
+            </div>
+
+            <div class="col-xs-4">
+                <form method="post" action="{{ path_for('calculer_general') }}">
+                    <input type="hidden" name="{{ csrf.keyname }}" value="{{ csrf.name }}">
+                    <input type="hidden" name="{{ csrf.keyval }}" value="{{ csrf.value }}">
+
+                    <button type="submit" class="btn btn-primary">Calculer Classement Général</button>
+                </form>
+            </div>
+
+
+        </div> <!-- row -->
+
+            </div>
+        </div> <!-- box -->
+
+        <div class="box">
+            <div class="box-header"><h3 class="box-title">Télécharger le fichier résultat en json</h3></div>
+
+        <div class="box-body">
+            <div class="row">
+
+                    <div class="col-xs-12">
+                        <a class="btn btn-app" href="{{ base_path() }}{{ path_for('json_resultat') }}">
+                            <i class="fa fa-download"></i>résultats JSON</a>
+                    </div>
+
+            </div>
+        </div>
+        </div>
+
+
+
+    </section>
+
+
+{% endblock %}

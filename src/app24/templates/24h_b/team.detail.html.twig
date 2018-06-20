@@ -1,0 +1,78 @@
+{% extends "main_layout.html.twig" %}
+
+{% block main_content %}
+
+
+    <h2>Inscription aux 24h des DUT Info</h2>
+    <h3>25-26 mai 2018, IUT Nancy-Charlemagne</h3>
+
+    <p>Votre inscription a bien été prise en compte avec les données indiquées ci-dessous.</p>
+    <p>Les inscriptions sont automatiquement validées dans la limite de 1 équipe par IUT. Pour la 2ème, voire la 3ème équipe
+    d'un même IUT, les inscriptions seront validées en cas de place disponible après la fin des inscriptions,
+    dans l'ordre d'inscription.</p>
+    <p>Toute inscription validée ne sera définitive qu'à la réception d'un paiement de 72€.</p>
+    <p>Vous pouvez accéder à votre inscription en suivant ce lien : <a href="{{ e.team_url }}">{{ e.team_url }}</a></p>
+
+
+    <h2>Données d'inscription de l'équipe : </h2>
+    <table class="table">
+     <tr> <th>IUT d'origine </th> <td>{{e.team_from | iutname}}</td></tr>
+        <tr> <th>Nom de l'équipe </th> <td>{{e.team_name|raw}}</td></tr>
+        <tr> <th>email contact </th> <td>{{e.contact_email}}</td></tr>
+        <tr> <th>date de l'inscription </th> <td>{{ e.created_at| date("d-m-Y // H:i") }}</td></tr>
+        <tr> <th>état de l'inscription </th> <td>{{ e.valid_registration == 1 ? 'validée' : 'en attente'}}</td></tr>
+        <tr> <th>paiement </th> <td>{{e.registration_paid ==1 ? 'reçu': 'en attente'}}</tr>
+
+    </table>
+    <h2>membres de l'équipe : </h2>
+    <table class="table">
+          {% for m in e.membres %}
+              <tr> <td>{{m.firstname | raw}} {{m.lastname | raw}}</td><td>{{ m.email }}</td></tr>
+          {% endfor %}
+
+    </table>
+      {% if  e.valid_registration != 1 %}
+        <p class="alert alert-warning"><strong>Attention : </strong> Votre inscription est la n° {{e.team_priority}} pour l'iut de {{e.team_from | iutname}}. Elle sera validée
+          si des places sont disponibles après la date limite d'inscription.</p>
+      {% endif %}
+
+
+      <h2>paiement : </h2>
+      <p class="alert alert-primary">Votre inscription est définitive si le paiement de l'inscription (72€ pour l'équipe) a été reçu. Pour adresser votre paiement,
+      2 cas sont passibles : </p>
+        <ul>
+          <li>vous payez vous-même: envoyez un chèque de 72€ à l'ordre de : ASSIDUT , accompagné de ce récépissé imprimé, à l'adresse indiquée ci-dessous, </li>
+          <li>votre IUT paye: inprimez un récépissé d'inscription et transmettez à l'IUT qui nous fera parvenir un bon de commande.
+            Les documents nécessaires sont disponibles sur notre site, rubrique "documents"
+          </li>
+        </ul>
+    <p class="alert alert-secondary"> adresse d'envoi des paiements </p>
+        <ul class="list-unstyled">
+            <li>24h DUT Info - Secrétariat du Département d'Informatique </li>
+            <li>IUT Nancy-Charlemagne</li>
+            <li>2ter Boulevard Charlemagne </li>
+            <li>CS 55227 </li>
+            <li> 54042 Nancy cedex</li>
+        </ul>
+
+
+      <button type="button" class="btn btn-info noprint" onclick="window.print();"><i class="fa fa-print"></i> imprimer</button>
+
+<br>
+
+    <h2 class="noprint">Messages des organisateurs :</h2>
+
+    {% for message in messages %}
+
+        <div class="alert alert-info noprint">
+           <h4 class="alert-heading">{{ message.created_at | date("d-m-Y") }}</h4>
+            <hr>
+            {{ message.content | raw}}
+
+        </div>
+
+
+    {% endfor %}
+
+
+{% endblock %}

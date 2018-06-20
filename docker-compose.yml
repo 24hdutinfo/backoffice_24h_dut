@@ -1,0 +1,74 @@
+version: "3"
+
+#networks:
+#  24h_back_network:
+#    driver: bridge
+
+services:
+  web:
+    image: canals/php:7.1
+#    container_name: api.lbs.local
+    environment:
+      - VHOST_HOSTNAME=24h.local
+      - VHOST_DOCROOT=/var/www/public
+    ports:
+      - "1680:80"
+      - "1643:443"
+    volumes :
+      - ./public:/var/www/public
+      - ./src:/var/www/src
+      - ./config:/var/www/config
+      - ./log:/var/www/log
+ #   networks:
+ #     - 24h_back_network
+    links :
+      - mysql:db
+      - mail:mailcatch
+
+
+
+#############################
+# mysql + adminer / can be replaced by mariadb
+#############################
+  mysql:
+#    image: mysql:5.6
+    image: mariadb:5.5
+    environment:
+      - MYSQL_ROOT_PASSWORD=root123
+      - MYSQL_USER=24h
+      - MYSQL_PASSWORD=24h
+      - MYSQL_DATABASE=24h
+    ports:
+      - "3603:3306"
+ #   networks:
+ #     - 24h_back_network
+    volumes :
+      - ./sql:/var/sql
+
+  adminer:
+     image: adminer
+     ports:
+       - "8080:8080"
+ #    networks:
+ #      - 24h_back_network
+     links:
+       - mysql:db
+
+
+
+##############################################
+# mailcatcher
+##############################################
+  mail:
+    image: schickling/mailcatcher
+ #   networks:
+ #     - 24h_back_network
+    ports:
+      - "1080:1080"
+
+########################################
+# shared storage : useful for, e.g. sharing
+#   uploaded documents (img, others) between multiple services
+########################################
+volumes:
+   data:

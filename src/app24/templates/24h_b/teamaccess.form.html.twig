@@ -1,0 +1,40 @@
+{%  extends "main_layout.html.twig" %}
+
+  {%  block main_content %}
+
+
+    <h2>Accès aux informations privées d'une équipe</h2>
+  <h4> fournissez le mail de contact et le mot de passe de l'équipe</h4>
+
+
+  {% if errors %}
+    <p class="error">Des erreurs dans la saisie des données ont été détectées. Merci de corriger :</p>
+    <ul class="error">
+        {% for  messages in errors %}
+            {% for message in messages %}
+          <li> {{ message }}</li>
+            {% endfor %}
+        {%  endfor %}
+    </ul>
+
+    {% endif %}
+
+  <form id="team_access_form" class="form" method="POST" action="{{ base_path() }}/teams/{{ id }}">
+
+      <input type="hidden" name="{{ csrf.keyname }}" value="{{ csrf.name }}">
+      <input type="hidden" name="{{ csrf.keyval }}" value="{{ csrf.value }}">
+
+
+      <div class="form-group"> <label for="ctform_email">mail contact</label>
+        <input type="email" class="form-control" name="ctform_email" id="ctform_email" required placeholder="email de contact" value="{{ v.ctform_email }}">
+      </div>
+      <div class="form-group"> <label for="ctform_pass">password équipe</label>
+       <input type="password" class="form-control" name="ctform_pass" id="ctform_pass" required placeholder="password (8 char. min)" minlength="8">
+      </div>
+
+      <button class="btn btn-warning" type="submit" name="ctform_submit" value="ctform_create_team">accès</button>
+  </form>
+
+
+
+    {%  endblock %}

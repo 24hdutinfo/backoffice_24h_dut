@@ -1,0 +1,28 @@
+{% extends "admin_layout.html.twig" %}
+
+{% block main_admin_content %}
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <h1>
+            Administration de l'application 24h DUT
+            <small>pour les personnes autorisées uniquement</small>
+        </h1>
+        <ol class="breadcrumb">
+            <li><i class="fa fa-dashboard"></i> Level</li>
+            <li class="active">{{ user.user_level == 10 ? 'ADMIN' : 'NINJA' }}</li>
+        </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content container-fluid">
+
+        <!--------------------------
+          | Your Page Content Here |
+          -------------------------->
+
+
+    </section>
+
+
+{% endblock %}

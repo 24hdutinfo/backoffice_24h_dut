@@ -1,0 +1,56 @@
+.header24h {
+  padding-top: 8rem;
+  min-height: 33vh;
+}
+
+.content {
+  padding: 3rem 1.5rem;
+}
+
+.jumbotron {
+  text-align: center;
+  color: #FFFFFF;
+}
+
+.centreVerticalement {
+ display: inline-block;
+ vertical-align: middle;
+ float: none;
+}
+
+#map {
+  height: 600px;
+}
+
+.badge{
+ font-size:100%;
+}
+
+.sponsor {
+  margin-bottom: 1em;
+}
+
+main h1, main h2 {
+  background-color: #DDDDDD;
+  padding-left: 20px;
+  margin-bottom: 20px;
+  margin-top: 40px;
+  border-radius: 5px;
+}
+
+
+
+@media print {
+  nav, header, button, .noprint, .jumbotron, .footer {
+    display: none;
+  }
+
+  body {
+    background-color: transparent;
+    width: 21cm;
+    height: 29.7cm;
+    font-size: 14px;
+    padding: 1.5cm;
+    color: black;
+  }
+}

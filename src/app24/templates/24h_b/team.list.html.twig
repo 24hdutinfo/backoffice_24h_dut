@@ -1,0 +1,97 @@
+{%  extends "main_layout.html.twig" %}
+
+  {%  block main_content %}
+
+      <h2>Les équipes inscrites : {{ nb_valid }} validées et  {{ nb_wait }} en attente</h2>
+
+      <hr>
+   <div class="row">
+
+    <!-- <div> -->
+          <div class="col-6 col-md-3"><span class="badge badge-pill badge-success"> I </span> : inscription validée</div>
+          <div class="col-6 col-md-3"><span class="badge badge-pill badge-warning"> I </span> : inscription en attente</div>
+          <div class="col-6 col-md-3"><span class="badge badge-pill badge-success"> P </span> : paiement reçu</div>
+          <div class="col-6 col-md-3"><span class="badge badge-pill badge-warning">P</span> : paiement en attente</div>
+      <!-- </div> -->
+   </div>
+      <hr>
+      <br> <br>
+
+       {%  set iut = 0 %}
+
+  {% for t in teams %}
+
+       {%  if iut != 0 and t.team_from != iut %}
+           </div> <!-- row -->
+       {%  endif %}
+
+      {%  if  t.team_from != iut %}
+          <!-- <div class="row-team"> --> <!-- row_team -->
+          <div class="row">
+      {%  endif %}
+
+              <!-- <div class="team"> -->
+      <div class="col-12 col-md-4">
+                  <table class="table table-striped table-sm">
+                      <thead class="thead-light">
+                      <tr>
+                          <th> <a href="{{ t.team_url }}"> {{ t.team_name | raw}}</a></th>
+                          <th>{{ t.team_from|iutname }}</th>
+
+
+                          <th>{% if t.valid_registration == 1  %}
+                              <span class="badge badge-pill badge-success"> I </span>
+                              {% else %}
+                                  <span class="badge badge-pill badge-warning"> I </span>
+                              {% endif %}
+                              {% if t.registration_paid == 1  %}
+                                  <span class="badge badge-pill badge-success"> P </span>
+                              {% else %}
+                                  <span class="badge badge-pill badge-warning">P</span>
+                              {% endif %}
+
+
+                           </th>
+                      </tr>
+                      </thead>
+
+
+                      <tbody>
+                      {% if show_name == true %}
+                      <tr>
+
+                          {% for m in t.membres %}
+
+                              {%  if loop.index == 4 %}
+                      </tr><tr>
+
+                              {% endif %}
+                          <td>{{ m.firstname |raw}} {{ m.lastname | raw }}</td>
+
+                          {% endfor %}
+
+                      </tr>
+                       {% endif %}
+                      <tr>
+                          <td colspan="3">
+                              date inscr. : {{ t.created_at|date("d-m-Y // H:i") }}
+                              </td>
+
+                      </tr>
+                      </tbody>
+
+
+                  </table>
+
+                {% set iut = t.team_from %}
+
+              </div>
+
+      {% endfor %}
+
+      </div> <!-- row -->
+
+
+      </div> <!-- list_teams -->
+
+    {%  endblock %}
